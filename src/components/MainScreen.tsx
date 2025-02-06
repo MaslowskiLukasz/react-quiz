@@ -28,7 +28,8 @@ export function MainScreen() {
 
   const categoryNames = categories.map((item: Category) => item.name);
   const selectedCategory = categories.find((item: Category) => item.name === selectedCategoryName);
-  const questionsParams = `api.php?amount=10&type=multiple`;
+  const categoryParam = selectedCategory ? `&category=${selectedCategory.id}` : '';
+  const questionsParams = `api.php?amount=10${categoryParam}&type=multiple`;
 
   return (
     <>
@@ -41,8 +42,6 @@ export function MainScreen() {
         onChange={setSelectedCategoryName}
       />
       <Button onClick={handleStart}>Start quiz</Button>
-      <p>{JSON.stringify(selectedCategory)}</p>
-      <p>{questionsParams}</p>
     </>
   )
 }
