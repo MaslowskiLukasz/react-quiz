@@ -5,7 +5,6 @@ import { MantineProvider } from '@mantine/core';
 import { MainScreen } from './components/MainScreen';
 
 function App() {
-
   return (
     <MantineProvider>
       <MainScreen />
