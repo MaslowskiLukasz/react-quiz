@@ -12,14 +12,14 @@ export function MainScreen() {
     queryFn: fetchCategories
   });
 
-  const { data: questions, refetch } = useQuery({
+  const { data: questions, refetch: refetchQuestions } = useQuery({
     queryKey: ['questions'],
     queryFn: () => fetchQuestions(questionsParams),
     enabled: false
   });
 
   const handleStart = () => {
-    refetch();
+    refetchQuestions();
   };
 
   if (categoriesStatus !== 'success') {
