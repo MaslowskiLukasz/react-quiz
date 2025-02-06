@@ -1,16 +1,15 @@
 import './App.css';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
-import { Select } from '@mantine/core';
 
 import { MantineProvider } from '@mantine/core';
+import { MainScreen } from './components/MainScreen';
 
 function App() {
 
   return (
     <MantineProvider>
-      Test
-      <Select label="test" placeholder="here we go" data={['test1', 'test2']} />
+      <MainScreen />
     </MantineProvider>
   )
 }
