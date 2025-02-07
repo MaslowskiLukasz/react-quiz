@@ -9,14 +9,18 @@ type Props = {
   onPrevious: () => void;
 }
 export function QuestionCard(props: Props) {
-  const { question, questionNumber, onNext, onPrevious } = props;
+  const { question, answers, questionNumber, onNext, onPrevious } = props;
+  const answerButtons = answers.map((item, index) => <Answer key={index} value={item} />);
+
   return (
     <>
       <h2>Question #{questionNumber + 1}</h2>
       <p>{question}</p>
-      <Answer />
-      <Button onClick={onPrevious}>Previous</Button>
-      <Button onClick={onNext}>Next</Button>
+      {answerButtons}
+      <div>
+        <Button onClick={onPrevious}>Previous</Button>
+        <Button onClick={onNext}>Next</Button>
+      </div>
     </>
   )
 }

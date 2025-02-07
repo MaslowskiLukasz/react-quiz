@@ -12,6 +12,10 @@ export function Questions(props: Props) {
   const { questions } = props;
   const [questionNumber, setQuestionNumber] = useState(0);
   const currentQuestion = { ...questions[questionNumber] };
+  const answers = [
+    currentQuestion.correct_answer,
+    ...currentQuestion.incorrect_answers
+  ];
 
   const navigation = questions.map((_, index) => {
     return <QuestionNavigation key={index} questionNumber={index + 1} />
@@ -35,7 +39,7 @@ export function Questions(props: Props) {
       <QuestionCard
         question={currentQuestion.question}
         questionNumber={questionNumber}
-        answers={[]}
+        answers={answers}
         onNext={handleNextQuestion}
         onPrevious={handlePreviousQuestion}
       />
