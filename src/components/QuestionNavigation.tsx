@@ -1,5 +1,9 @@
 import { Button } from "@mantine/core";
 
-export function QuestionNavigation() {
-  return <Button>Q#1</Button>;
+type Props = {
+  questionNumber: number;
+}
+export function QuestionNavigation(props: Props) {
+  const { questionNumber } = props;
+  return <Button>{questionNumber}</Button>;
 }
