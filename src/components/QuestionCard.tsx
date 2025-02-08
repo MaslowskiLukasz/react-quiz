@@ -1,5 +1,5 @@
 import { Answer } from "./Answer";
-import { Button } from "@mantine/core";
+import { Button, SimpleGrid } from "@mantine/core";
 
 type Props = {
   questionNumber: number
@@ -16,7 +16,9 @@ export function QuestionCard(props: Props) {
     <>
       <h2>Question #{questionNumber + 1}</h2>
       <p>{question}</p>
-      {answerButtons}
+      <SimpleGrid cols={2}>
+        {answerButtons}
+      </SimpleGrid>
       <div>
         <Button onClick={onPrevious}>Previous</Button>
         <Button onClick={onNext}>Next</Button>
