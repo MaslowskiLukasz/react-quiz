@@ -2,8 +2,9 @@ import { Button } from "@mantine/core";
 
 type Props = {
   questionNumber: number;
+  onClick: () => void;
 }
 export function QuestionNavigation(props: Props) {
-  const { questionNumber } = props;
-  return <Button>{questionNumber}</Button>;
+  const { questionNumber, onClick } = props;
+  return <Button onClick={onClick}>{questionNumber + 1}</Button>;
 }

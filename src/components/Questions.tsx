@@ -14,7 +14,7 @@ export function Questions(props: Props) {
   const currentQuestion = { ...questions[questionNumber] };
 
   const navigation = questions.map((_, index) => {
-    return <QuestionNavigation key={index} questionNumber={index + 1} />
+    return <QuestionNavigation key={index} questionNumber={index} onClick={() => handleGoToQuestion(index)} />
   });
 
   const handleNextQuestion = (): void => {
@@ -27,6 +27,9 @@ export function Questions(props: Props) {
       setQuestionNumber(questionNumber - 1);
     };
   };
+  const handleGoToQuestion = (value: number): void => {
+    setQuestionNumber(value);
+  }
 
 
   return (
