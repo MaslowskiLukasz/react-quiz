@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Category } from "../models/models";
 import { fetchCategories } from "../helpers/api";
+import { Loader } from "./Loader";
 
 type Props = {
   onStart: (queryParam: string) => void;
@@ -20,7 +21,7 @@ export function MainScreen(props: Props) {
   };
 
   if (categoriesStatus !== 'success') {
-    return <div>Nope</div>
+    return <Loader />
   }
 
   const categoryNames = categories.map((item: Category) => item.name);
