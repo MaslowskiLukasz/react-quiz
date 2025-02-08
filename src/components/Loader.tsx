@@ -1,3 +1,6 @@
+import { Loader as LoaderUI } from "@mantine/core";
+
 export function Loader() {
-  return <div>Loading ... </div>;
+  return <LoaderUI color="blue" />;
 }
+
