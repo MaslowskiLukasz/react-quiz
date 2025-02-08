@@ -7,8 +7,10 @@ import { Loader } from "./Loader";
 
 type Props = {
   onStart: (queryParam: string) => void;
-}
-export function MainScreen(props: Props) {
+};
+
+export function Start(props: Props) {
+  const { onStart } = props;
   const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>('');
 
   const { status: categoriesStatus, data: categories } = useQuery({
@@ -17,11 +19,11 @@ export function MainScreen(props: Props) {
   });
 
   const handleStart = () => {
-    props.onStart(questionsParams);
+    onStart(questionsParams);
   };
 
   if (categoriesStatus !== 'success') {
-    return <Loader />
+    return <Loader />;
   }
 
   const categoryNames = categories.map((item: Category) => item.name);

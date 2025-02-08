@@ -2,13 +2,13 @@ import './App.css';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
 import { MantineProvider } from '@mantine/core';
-import { MainScreen } from './components/MainScreen';
 import { useState } from 'react';
 import { Questions } from './components/Questions';
 import { Results } from './components/Results';
 import { useQuery } from '@tanstack/react-query';
 import { fetchQuestions } from './helpers/api';
 import { Loader } from './components/Loader';
+import { Start } from './components/Start';
 
 type State = 'start' | 'loading' | 'quiz' | 'result';
 
@@ -29,25 +29,25 @@ function App() {
     setState('quiz');
   };
 
-  let stateComponent = null;
+  let view = null;
   switch (state) {
     case 'loading':
-      stateComponent = <Loader />
+      view = <Loader />
       break;
     case 'quiz':
-      stateComponent = <Questions questions={data || []} />
+      view = <Questions questions={data || []} />
       break;
     case 'result':
-      stateComponent = <Results />;
+      view = <Results />;
       break;
     default:
-      stateComponent = <MainScreen onStart={handleStartQuiz} />;
+      view = <Start onStart={handleStartQuiz} />
       break;
   }
 
   return (
     <MantineProvider>
-      {stateComponent}
+      {view}
     </MantineProvider>
   )
 }
