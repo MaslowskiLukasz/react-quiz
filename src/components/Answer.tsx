@@ -1,5 +1,10 @@
 import { Button } from "@mantine/core";
 
-export function Answer() {
-  return <Button>Answer</Button>;
+type Props = {
+  value: string;
+}
+export function Answer(props: Props) {
+  const { value } = props;
+
+  return <Button>{value}</Button>;
 }

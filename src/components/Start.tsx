@@ -2,9 +2,15 @@ import { Button, Select } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Category } from "../models/models";
-import { fetchQuestions, fetchCategories } from "../helpers/api";
+import { fetchCategories } from "../helpers/api";
+import { Loader } from "./Loader";
 
-export function MainScreen() {
+type Props = {
+  onStart: (queryParam: string) => void;
+};
+
+export function Start(props: Props) {
+  const { onStart } = props;
   const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>('');
 
   const { status: categoriesStatus, data: categories } = useQuery({
@@ -12,18 +18,12 @@ export function MainScreen() {
     queryFn: fetchCategories
   });
 
-  const { data: questions, refetch: refetchQuestions } = useQuery({
-    queryKey: ['questions'],
-    queryFn: () => fetchQuestions(questionsParams),
-    enabled: false
-  });
-
   const handleStart = () => {
-    refetchQuestions();
+    onStart(questionsParams);
   };
 
   if (categoriesStatus !== 'success') {
-    return <div>Nope</div>
+    return <Loader />;
   }
 
   const categoryNames = categories.map((item: Category) => item.name);
@@ -33,7 +33,7 @@ export function MainScreen() {
 
   return (
     <>
-      <h2>Pick categories and have fun</h2>
+      <h2>Pick a category and start the quiz</h2>
       <Select
         label='Categories'
         placeholder='Pick categories'
