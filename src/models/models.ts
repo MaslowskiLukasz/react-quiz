@@ -9,17 +9,30 @@ export interface Question {
 	incorrect_answers: string[];
 }
 
+export class AnswerPresentationModel {
+	text: string = '';
+	isCorrect: boolean = false;
+
+	constructor(text: string, isCorrect: boolean) {
+		this.text = text;
+		this.isCorrect = isCorrect;
+	}
+}
+
 export class QuestionPresentationModel {
 	question: string = '';
-	answers: string[] = [];
+	answers: AnswerPresentationModel[] = [];
 
 	constructor(response: Question) {
 		this.question = response.question;
+		const correct = new AnswerPresentationModel(response.correct_answer, true);
+		const incorrect = response.incorrect_answers.map((item) => new AnswerPresentationModel(item, false));
 		const randomizedAnswers =
 			[
-				...response.incorrect_answers,
-				response.correct_answer
-			].sort(() => 0.5 - Math.random());
+				...incorrect,
+				correct
+			]
+				.sort(() => 0.5 - Math.random());
 		this.answers = [...randomizedAnswers];
 	}
 }
