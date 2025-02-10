@@ -16,8 +16,11 @@ interface SelectAnswerContextType {
 }
 
 type State = 'start' | 'loading' | 'quiz' | 'result';
-export const SelectAnswerContext =
-  createContext<SelectAnswerContextType>({ setSelected: () => { }, selectedAnswers: [] });
+
+export const SelectAnswerContext = createContext<SelectAnswerContextType>({
+  setSelected: () => { },
+  selectedAnswers: []
+});
 
 function App() {
   const [state, setState] = useState<State>('start');
@@ -37,9 +40,9 @@ function App() {
     setState('quiz');
   };
   const setSelected = (question: number, answer: number): void => {
-    const newSelected = [...selectedAnswers];
-    newSelected[question] = answer;
-    setSelectedAnswers(newSelected);
+    const newSelectedAnswers = [...selectedAnswers];
+    newSelectedAnswers[question] = answer;
+    setSelectedAnswers(newSelectedAnswers);
   }
 
   let view = null;
