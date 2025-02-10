@@ -5,7 +5,7 @@ type Props = {
   isAnswerSelected: boolean;
   onClick: () => void;
 }
-export function QuestionNavigation(props: Props) {
+export function Navigation(props: Props) {
   const { questionNumber, isAnswerSelected, onClick } = props;
   return <Button variant={isAnswerSelected ? 'filled' : 'outline'} onClick={onClick}>{questionNumber + 1}</Button>;
 }

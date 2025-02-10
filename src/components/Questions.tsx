@@ -1,8 +1,8 @@
-import { QuestionNavigation } from "./QuestionNavigation";
 import { QuestionPresentationModel } from "../models/models";
 import { QuestionCard } from "./QuestionCard";
 import { useContext, useState } from "react";
 import { SelectAnswerContext } from "../App";
+import { Navigation } from "./Navigation";
 
 type Props = {
   questions: QuestionPresentationModel[]
@@ -17,7 +17,7 @@ export function Questions(props: Props) {
 
   const navigation = questions.map((_, index) => {
     return (
-      <QuestionNavigation
+      <Navigation
         key={index}
         questionNumber={index}
         onClick={() => handleGoToQuestion(index)}
