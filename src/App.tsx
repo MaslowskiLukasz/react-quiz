@@ -25,7 +25,7 @@ export const SelectAnswerContext = createContext<SelectAnswerContextType>({
 function App() {
   const [state, setState] = useState<State>('start');
   const [questionParams, setQuestionParams] = useState<string>('');
-  const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(9).fill(null));
+  const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(10).fill(null));
 
   const { data, refetch } = useQuery({
     queryKey: ['questions'],

@@ -2,9 +2,10 @@ import { Button } from "@mantine/core";
 
 type Props = {
   questionNumber: number;
+  isAnswerSelected: boolean;
   onClick: () => void;
 }
 export function QuestionNavigation(props: Props) {
-  const { questionNumber, onClick } = props;
-  return <Button onClick={onClick}>{questionNumber + 1}</Button>;
+  const { questionNumber, isAnswerSelected, onClick } = props;
+  return <Button variant={isAnswerSelected ? 'filled' : 'outline'} onClick={onClick}>{questionNumber + 1}</Button>;
 }

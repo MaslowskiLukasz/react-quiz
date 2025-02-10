@@ -36,8 +36,8 @@ export function QuestionCard(props: Props) {
         {answerButtons}
       </SimpleGrid>
       <div>
-        <Button onClick={onPrevious}>Previous</Button>
-        <Button onClick={onNext}>Next</Button>
+        <Button onClick={onPrevious} disabled={questionNumber < 1}>Previous</Button>
+        <Button onClick={onNext}>{questionNumber >= 9 ? 'End' : 'Next'}</Button>
       </div>
     </>
   )
