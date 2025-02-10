@@ -26,7 +26,13 @@ export function Question(props: Props) {
         isSelected={isSelected(index)}
       />
     );
-  })
+  });
+
+  const areAllAnswersSelected = !selectedAnswers.some((item) => item === null);
+  const isLastQuestion = questionNumber >= 9;
+  const previousButtonEnabled = questionNumber > 0;
+  const nextButtonEnabled = !isLastQuestion || areAllAnswersSelected;
+  const isSubmitButton = isLastQuestion && areAllAnswersSelected;
 
   return (
     <>
@@ -36,8 +42,10 @@ export function Question(props: Props) {
         {answerButtons}
       </SimpleGrid>
       <div>
-        <Button onClick={onPrevious} disabled={questionNumber < 1}>Previous</Button>
-        <Button onClick={onNext}>{questionNumber >= 9 ? 'End' : 'Next'}</Button>
+        <Button onClick={onPrevious} disabled={!previousButtonEnabled}>Previous</Button>
+        <Button onClick={onNext} disabled={!nextButtonEnabled}>
+          {isSubmitButton ? 'Submit' : 'Next'}
+        </Button>
       </div>
     </>
   )
