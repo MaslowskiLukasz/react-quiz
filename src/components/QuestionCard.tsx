@@ -1,16 +1,32 @@
+import { useContext } from "react";
+import { AnswerPresentationModel } from "../models/models";
 import { Answer } from "./Answer";
 import { Button, SimpleGrid } from "@mantine/core";
+import { SelectAnswerContext } from "../App";
 
 type Props = {
   questionNumber: number
   question: string;
-  answers: string[];
+  answers: AnswerPresentationModel[];
   onNext: () => void;
   onPrevious: () => void;
 }
 export function QuestionCard(props: Props) {
   const { question, answers, questionNumber, onNext, onPrevious } = props;
-  const answerButtons = answers.map((item, index) => <Answer key={index} value={item} />);
+  const { setSelected, selectedAnswers } = useContext(SelectAnswerContext);
+  const isSelected = (index: number) => {
+    return selectedAnswers[questionNumber] === index;
+  }
+  const answerButtons = answers.map((item, index) => {
+    return (
+      <Answer
+        key={index}
+        value={item}
+        handleClick={() => setSelected(questionNumber, index)}
+        isSelected={isSelected(index)}
+      />
+    );
+  })
 
   return (
     <>

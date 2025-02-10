@@ -1,10 +1,14 @@
 import { Button } from "@mantine/core";
+import { AnswerPresentationModel } from "../models/models";
 
 type Props = {
-  value: string;
+  value: AnswerPresentationModel;
+  handleClick: () => void;
+  isSelected: boolean;
 }
 export function Answer(props: Props) {
-  const { value } = props;
+  const { value, handleClick, isSelected } = props;
+  const variant = isSelected ? 'filled' : 'outline';
 
-  return <Button>{value}</Button>;
+  return <Button onClick={handleClick} variant={variant}>{value.text}</Button>;
 }
