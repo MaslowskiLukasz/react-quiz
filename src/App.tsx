@@ -9,15 +9,18 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchQuestions } from './helpers/api';
 import { Loader } from './components/Loader';
 import { Start } from './components/Start';
+import { QuestionPresentationModel } from './models/models';
 
 interface SelectAnswerContextType {
+  questions: QuestionPresentationModel[];
   setSelected: (question: number, answer: number) => void;
   selectedAnswers: number[];
 }
 
-type State = 'start' | 'loading' | 'quiz' | 'result';
+type State = 'start' | 'loading' | 'quiz' | 'results';
 
 export const SelectAnswerContext = createContext<SelectAnswerContextType>({
+  questions: [],
   setSelected: () => { },
   selectedAnswers: []
 });
@@ -45,32 +48,30 @@ function App() {
     setSelectedAnswers(newSelectedAnswers);
   };
   const handleSubmit = () => {
-    console.log('submit');
+    setState('results');
   }
 
   let view = null;
   switch (state) {
     case 'loading':
-      view = <Loader />
+      view = <Loader />;
       break;
     case 'quiz':
-      view = (
-        <SelectAnswerContext.Provider value={{ setSelected, selectedAnswers }}>
-          <Questions questions={data || []} onSubmit={handleSubmit} />
-        </SelectAnswerContext.Provider>
-      )
+      view = <Questions onSubmit={handleSubmit} />;
       break;
-    case 'result':
+    case 'results':
       view = <Results />;
       break;
     default:
-      view = <Start onStart={handleStartQuiz} />
+      view = <Start onStart={handleStartQuiz} />;
       break;
   }
 
   return (
     <MantineProvider>
-      {view}
+      <SelectAnswerContext.Provider value={{ questions: data || [], setSelected, selectedAnswers }}>
+        {view}
+      </SelectAnswerContext.Provider>
     </MantineProvider>
   )
 }

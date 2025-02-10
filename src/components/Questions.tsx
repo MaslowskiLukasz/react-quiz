@@ -1,18 +1,16 @@
-import { QuestionPresentationModel } from "../models/models";
 import { useContext, useState } from "react";
 import { SelectAnswerContext } from "../App";
 import { Navigation } from "./Navigation";
 import { Question } from "./Question";
 
 type Props = {
-  questions: QuestionPresentationModel[],
   onSubmit: () => void,
 }
 const MAX_QUESTION_NUMBER = 9;
 
 export function Questions(props: Props) {
-  const { questions, onSubmit } = props;
-  const { selectedAnswers } = useContext(SelectAnswerContext);
+  const { onSubmit } = props;
+  const { questions, selectedAnswers } = useContext(SelectAnswerContext);
   const [questionNumber, setQuestionNumber] = useState(0);
   const currentQuestion = { ...questions[questionNumber] };
 
