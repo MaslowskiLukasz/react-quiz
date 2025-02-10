@@ -1,8 +1,8 @@
 import { QuestionPresentationModel } from "../models/models";
-import { QuestionCard } from "./QuestionCard";
 import { useContext, useState } from "react";
 import { SelectAnswerContext } from "../App";
 import { Navigation } from "./Navigation";
+import { Question } from "./Question";
 
 type Props = {
   questions: QuestionPresentationModel[]
@@ -44,7 +44,7 @@ export function Questions(props: Props) {
   return (
     <>
       {navigation}
-      <QuestionCard
+      <Question
         question={currentQuestion.question}
         questionNumber={questionNumber}
         answers={currentQuestion.answers}

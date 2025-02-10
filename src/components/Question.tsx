@@ -11,7 +11,7 @@ type Props = {
   onNext: () => void;
   onPrevious: () => void;
 }
-export function QuestionCard(props: Props) {
+export function Question(props: Props) {
   const { question, answers, questionNumber, onNext, onPrevious } = props;
   const { setSelected, selectedAnswers } = useContext(SelectAnswerContext);
   const isSelected = (index: number) => {
