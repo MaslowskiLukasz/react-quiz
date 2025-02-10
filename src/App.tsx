@@ -43,6 +43,9 @@ function App() {
     const newSelectedAnswers = [...selectedAnswers];
     newSelectedAnswers[question] = answer;
     setSelectedAnswers(newSelectedAnswers);
+  };
+  const handleSubmit = () => {
+    console.log('submit');
   }
 
   let view = null;
@@ -53,7 +56,7 @@ function App() {
     case 'quiz':
       view = (
         <SelectAnswerContext.Provider value={{ setSelected, selectedAnswers }}>
-          <Questions questions={data || []} />
+          <Questions questions={data || []} onSubmit={handleSubmit} />
         </SelectAnswerContext.Provider>
       )
       break;

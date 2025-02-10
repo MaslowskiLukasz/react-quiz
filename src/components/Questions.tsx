@@ -5,12 +5,13 @@ import { Navigation } from "./Navigation";
 import { Question } from "./Question";
 
 type Props = {
-  questions: QuestionPresentationModel[]
+  questions: QuestionPresentationModel[],
+  onSubmit: () => void,
 }
 const MAX_QUESTION_NUMBER = 9;
 
 export function Questions(props: Props) {
-  const { questions } = props;
+  const { questions, onSubmit } = props;
   const { selectedAnswers } = useContext(SelectAnswerContext);
   const [questionNumber, setQuestionNumber] = useState(0);
   const currentQuestion = { ...questions[questionNumber] };
@@ -39,6 +40,10 @@ export function Questions(props: Props) {
   const handleGoToQuestion = (value: number): void => {
     setQuestionNumber(value);
   }
+  const handleSubmit = () => {
+    onSubmit();
+  }
+  const isLastQuestion = questionNumber === 9;
 
 
   return (
@@ -48,7 +53,7 @@ export function Questions(props: Props) {
         question={currentQuestion.question}
         questionNumber={questionNumber}
         answers={currentQuestion.answers}
-        onNext={handleNextQuestion}
+        onNext={isLastQuestion ? handleSubmit : handleNextQuestion}
         onPrevious={handlePreviousQuestion}
       />
     </>
