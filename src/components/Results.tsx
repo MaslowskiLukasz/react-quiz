@@ -2,6 +2,7 @@ import { AnswerSummary } from "./AnswerSummary";
 import { useContext } from "react";
 import { SelectAnswerContext } from "../App";
 import { PieChart } from "@mantine/charts";
+import { Accordion } from "@mantine/core";
 
 export function Results() {
   const { questions, selectedAnswers } = useContext(SelectAnswerContext);
@@ -40,8 +41,9 @@ export function Results() {
         withTooltip
         tooltipDataSource="segment"
       />
-      {summary}
+      <Accordion variant="separated">
+        {summary}
+      </Accordion>
     </>
-
   );
 }

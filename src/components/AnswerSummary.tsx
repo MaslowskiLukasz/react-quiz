@@ -9,15 +9,14 @@ interface Props {
 export function AnswerSummary(props: Props) {
   const { question, selectedAnswer } = props;
   const correctAnswer = question.answers.find((item) => item.isCorrect);
+
   return (
-    <Accordion>
-      <Accordion.Item value='Test'>
-        <Accordion.Control>{question.question}</Accordion.Control>
-        <Accordion.Panel>
-          <div>Selected answer: {question.answers[selectedAnswer].text}</div>
-          <div>Correct answer: {correctAnswer?.text}</div>
-        </Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
+    <Accordion.Item value={question.question} >
+      <Accordion.Control>{question.question}</Accordion.Control>
+      <Accordion.Panel>
+        <div>Selected answer: {question.answers[selectedAnswer].text}</div>
+        <div>Correct answer: {correctAnswer?.text}</div>
+      </Accordion.Panel>
+    </ Accordion.Item>
   );
 }
