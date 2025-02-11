@@ -13,7 +13,6 @@ export function Results() {
       return answer === correctAnswer;
     });
   const numberOfGoodAnswers = isAnswerCorrect.filter((item) => item === true).length;
-  const result = <div>{numberOfGoodAnswers}/{questions.length}</div>
   const chartData = [
     { name: 'Correct', value: numberOfGoodAnswers, color: 'green.6' },
     { name: 'Incorrect', value: 10 - numberOfGoodAnswers, color: 'red.6' },
@@ -32,7 +31,6 @@ export function Results() {
   return (
     <>
       <h2>Results</h2>
-      {result}
       <PieChart
         data={chartData}
         withLabels
