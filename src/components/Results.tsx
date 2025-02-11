@@ -6,7 +6,8 @@ import { Accordion, Button } from "@mantine/core";
 
 interface Props {
   onRestart: () => void;
-}
+};
+
 export function Results(props: Props) {
   const { onRestart } = props;
   const { questions, selectedAnswers } = useContext(SelectAnswerContext);

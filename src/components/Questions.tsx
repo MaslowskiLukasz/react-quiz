@@ -6,11 +6,10 @@ import { Question } from "./Question";
 type Props = {
   onSubmit: () => void,
 }
-const MAX_QUESTION_NUMBER = 9;
 
 export function Questions(props: Props) {
   const { onSubmit } = props;
-  const { questions, selectedAnswers } = useContext(SelectAnswerContext);
+  const { questions, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
   const [questionNumber, setQuestionNumber] = useState(0);
   const currentQuestion = { ...questions[questionNumber] };
 
@@ -26,7 +25,7 @@ export function Questions(props: Props) {
   });
 
   const handleNextQuestion = (): void => {
-    if (questionNumber < MAX_QUESTION_NUMBER) {
+    if (questionNumber < maxQuestions - 1) {
       setQuestionNumber(questionNumber + 1);
     };
   };
@@ -37,11 +36,11 @@ export function Questions(props: Props) {
   };
   const handleGoToQuestion = (value: number): void => {
     setQuestionNumber(value);
-  }
+  };
   const handleSubmit = () => {
     onSubmit();
-  }
-  const isLastQuestion = questionNumber === 9;
+  };
+  const isLastQuestion = questionNumber === maxQuestions - 1;
 
 
   return (

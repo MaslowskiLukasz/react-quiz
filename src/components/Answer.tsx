@@ -16,5 +16,6 @@ export function Answer(props: Props) {
       variant={variant}
     >
       {value.text}
-    </Button>);
+    </Button>
+  );
 }

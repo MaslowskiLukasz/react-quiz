@@ -13,7 +13,7 @@ type Props = {
 }
 export function Question(props: Props) {
   const { question, answers, questionNumber, onNext, onPrevious } = props;
-  const { setSelected, selectedAnswers } = useContext(SelectAnswerContext);
+  const { setSelected, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
   const isSelected = (index: number) => {
     return selectedAnswers[questionNumber] === index;
   }
@@ -29,7 +29,7 @@ export function Question(props: Props) {
   });
 
   const areAllAnswersSelected = !selectedAnswers.some((item) => item === null);
-  const isLastQuestion = questionNumber >= 9;
+  const isLastQuestion = questionNumber >= maxQuestions - 1;
   const previousButtonEnabled = questionNumber > 0;
   const nextButtonEnabled = !isLastQuestion || areAllAnswersSelected;
   const isSubmitButton = isLastQuestion && areAllAnswersSelected;

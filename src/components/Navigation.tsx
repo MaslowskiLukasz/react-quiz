@@ -7,5 +7,14 @@ type Props = {
 }
 export function Navigation(props: Props) {
   const { questionNumber, isAnswerSelected, onClick } = props;
-  return <Button variant={isAnswerSelected ? 'filled' : 'outline'} onClick={onClick}>{questionNumber + 1}</Button>;
+  const variant = isAnswerSelected ? 'filled' : 'outline';
+
+  return (
+    <Button
+      variant={variant}
+      onClick={onClick}
+    >
+      {questionNumber + 1}
+    </Button>
+  );
 }

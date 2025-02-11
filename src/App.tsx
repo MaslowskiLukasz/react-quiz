@@ -15,6 +15,7 @@ interface SelectAnswerContextType {
   questions: QuestionPresentationModel[];
   setSelected: (question: number, answer: number) => void;
   selectedAnswers: number[];
+  maxQuestions: number;
 }
 
 type State = 'start' | 'loading' | 'quiz' | 'results';
@@ -22,13 +23,15 @@ type State = 'start' | 'loading' | 'quiz' | 'results';
 export const SelectAnswerContext = createContext<SelectAnswerContextType>({
   questions: [],
   setSelected: () => { },
-  selectedAnswers: []
+  selectedAnswers: [],
+  maxQuestions: 10,
 });
 
 function App() {
+  const MAX_QUESTION = 10;
   const [state, setState] = useState<State>('start');
   const [questionParams, setQuestionParams] = useState<string>('');
-  const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(10).fill(null));
+  const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(MAX_QUESTION).fill(null));
 
   const { data, isLoading } = useQuery({
     queryKey: ['questions', questionParams],
@@ -50,7 +53,7 @@ function App() {
     setState('results');
   };
   const handleRestart = () => {
-    setSelectedAnswers(Array(10).fill(null));
+    setSelectedAnswers(Array(MAX_QUESTION).fill(null));
     setState('start');
   };
 
@@ -78,7 +81,15 @@ function App() {
 
   return (
     <MantineProvider>
-      <SelectAnswerContext.Provider value={{ questions: data || [], setSelected, selectedAnswers }}>
+      <SelectAnswerContext.Provider
+        value={
+          {
+            questions: data || [],
+            setSelected,
+            selectedAnswers,
+            maxQuestions: MAX_QUESTION
+          }
+        }>
         {view}
       </SelectAnswerContext.Provider>
     </MantineProvider>
