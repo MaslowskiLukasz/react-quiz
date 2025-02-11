@@ -24,7 +24,6 @@ export function AnswerSummary(props: Props) {
       <Accordion.Panel>
         <div>Selected answer: {question.answers[selectedAnswer].text}</div>
         <div>Correct answer: {correctAnswer?.text}</div>
-        <div>{isCorrect ? 'Yay!' : 'Nope!'}</div>
       </Accordion.Panel>
     </ Accordion.Item>
   );

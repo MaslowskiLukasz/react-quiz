@@ -2,7 +2,7 @@ import './App.css';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
 import { MantineProvider } from '@mantine/core';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Questions } from './components/Questions';
 import { Results } from './components/Results';
 import { useQuery } from '@tanstack/react-query';
@@ -30,17 +30,15 @@ function App() {
   const [questionParams, setQuestionParams] = useState<string>('');
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(10).fill(null));
 
-  const { data, refetch } = useQuery({
-    queryKey: ['questions'],
+  const { data, isLoading } = useQuery({
+    queryKey: ['questions', questionParams],
     queryFn: () => fetchQuestions(questionParams),
-    enabled: false
+    enabled: !!questionParams
   });
 
   const handleStartQuiz = async (queryParams: string): Promise<void> => {
     setQuestionParams(queryParams);
     setState('loading');
-    await refetch();
-    setState('quiz');
   };
   const setSelected = (question: number, answer: number): void => {
     const newSelectedAnswers = [...selectedAnswers];
@@ -49,7 +47,17 @@ function App() {
   };
   const handleSubmit = () => {
     setState('results');
-  }
+  };
+  const handleRestart = () => {
+    setSelectedAnswers(Array(10).fill(null));
+    setState('start');
+  };
+
+  useEffect(() => {
+    if (!isLoading && !!questionParams) {
+      setState('quiz')
+    }
+  }, [data]);
 
   let view = null;
   switch (state) {
@@ -60,7 +68,7 @@ function App() {
       view = <Questions onSubmit={handleSubmit} />;
       break;
     case 'results':
-      view = <Results />;
+      view = <Results onRestart={handleRestart} />;
       break;
     default:
       view = <Start onStart={handleStartQuiz} />;

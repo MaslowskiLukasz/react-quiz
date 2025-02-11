@@ -2,9 +2,13 @@ import { AnswerSummary } from "./AnswerSummary";
 import { useContext } from "react";
 import { SelectAnswerContext } from "../App";
 import { PieChart } from "@mantine/charts";
-import { Accordion } from "@mantine/core";
+import { Accordion, Button } from "@mantine/core";
 
-export function Results() {
+interface Props {
+  onRestart: () => void;
+}
+export function Results(props: Props) {
+  const { onRestart } = props;
   const { questions, selectedAnswers } = useContext(SelectAnswerContext);
 
   const isAnswerCorrect = selectedAnswers.map(
@@ -26,7 +30,7 @@ export function Results() {
         selectedAnswer={selectedAnswers[index]}
       />
     );
-  })
+  });
 
   return (
     <>
@@ -39,6 +43,7 @@ export function Results() {
         withTooltip
         tooltipDataSource="segment"
       />
+      <Button onClick={onRestart}>Restart</Button>
       <Accordion variant="separated">
         {summary}
       </Accordion>
