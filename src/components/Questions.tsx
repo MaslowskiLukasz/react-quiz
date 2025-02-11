@@ -1,24 +1,31 @@
-import { QuestionNavigation } from "./QuestionNavigation";
-import { QuestionPresentationModel } from "../models/models";
-import { QuestionCard } from "./QuestionCard";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SelectAnswerContext } from "../App";
+import { Navigation } from "./Navigation";
+import { Question } from "./Question";
 
 type Props = {
-  questions: QuestionPresentationModel[]
+  onSubmit: () => void,
 }
-const MAX_QUESTION_NUMBER = 9;
 
 export function Questions(props: Props) {
-  const { questions } = props;
+  const { onSubmit } = props;
+  const { questions, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
   const [questionNumber, setQuestionNumber] = useState(0);
   const currentQuestion = { ...questions[questionNumber] };
 
   const navigation = questions.map((_, index) => {
-    return <QuestionNavigation key={index} questionNumber={index} onClick={() => handleGoToQuestion(index)} />
+    return (
+      <Navigation
+        key={index}
+        questionNumber={index}
+        onClick={() => handleGoToQuestion(index)}
+        isAnswerSelected={selectedAnswers[index] !== null}
+      />
+    );
   });
 
   const handleNextQuestion = (): void => {
-    if (questionNumber < MAX_QUESTION_NUMBER) {
+    if (questionNumber < maxQuestions - 1) {
       setQuestionNumber(questionNumber + 1);
     };
   };
@@ -29,17 +36,21 @@ export function Questions(props: Props) {
   };
   const handleGoToQuestion = (value: number): void => {
     setQuestionNumber(value);
-  }
+  };
+  const handleSubmit = () => {
+    onSubmit();
+  };
+  const isLastQuestion = questionNumber === maxQuestions - 1;
 
 
   return (
     <>
       {navigation}
-      <QuestionCard
+      <Question
         question={currentQuestion.question}
         questionNumber={questionNumber}
         answers={currentQuestion.answers}
-        onNext={handleNextQuestion}
+        onNext={isLastQuestion ? handleSubmit : handleNextQuestion}
         onPrevious={handlePreviousQuestion}
       />
     </>

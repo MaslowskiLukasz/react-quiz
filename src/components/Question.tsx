@@ -11,9 +11,9 @@ type Props = {
   onNext: () => void;
   onPrevious: () => void;
 }
-export function QuestionCard(props: Props) {
+export function Question(props: Props) {
   const { question, answers, questionNumber, onNext, onPrevious } = props;
-  const { setSelected, selectedAnswers } = useContext(SelectAnswerContext);
+  const { setSelected, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
   const isSelected = (index: number) => {
     return selectedAnswers[questionNumber] === index;
   }
@@ -26,7 +26,13 @@ export function QuestionCard(props: Props) {
         isSelected={isSelected(index)}
       />
     );
-  })
+  });
+
+  const areAllAnswersSelected = !selectedAnswers.some((item) => item === null);
+  const isLastQuestion = questionNumber >= maxQuestions - 1;
+  const previousButtonEnabled = questionNumber > 0;
+  const nextButtonEnabled = !isLastQuestion || areAllAnswersSelected;
+  const isSubmitButton = isLastQuestion && areAllAnswersSelected;
 
   return (
     <>
@@ -36,8 +42,10 @@ export function QuestionCard(props: Props) {
         {answerButtons}
       </SimpleGrid>
       <div>
-        <Button onClick={onPrevious}>Previous</Button>
-        <Button onClick={onNext}>Next</Button>
+        <Button onClick={onPrevious} disabled={!previousButtonEnabled}>Previous</Button>
+        <Button onClick={onNext} disabled={!nextButtonEnabled}>
+          {isSubmitButton ? 'Submit' : 'Next'}
+        </Button>
       </div>
     </>
   )

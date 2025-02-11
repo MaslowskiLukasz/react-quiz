@@ -2,69 +2,96 @@ import './App.css';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
 import { MantineProvider } from '@mantine/core';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Questions } from './components/Questions';
 import { Results } from './components/Results';
 import { useQuery } from '@tanstack/react-query';
 import { fetchQuestions } from './helpers/api';
 import { Loader } from './components/Loader';
 import { Start } from './components/Start';
+import { QuestionPresentationModel } from './models/models';
 
 interface SelectAnswerContextType {
+  questions: QuestionPresentationModel[];
   setSelected: (question: number, answer: number) => void;
   selectedAnswers: number[];
+  maxQuestions: number;
 }
 
-type State = 'start' | 'loading' | 'quiz' | 'result';
-export const SelectAnswerContext =
-  createContext<SelectAnswerContextType>({ setSelected: () => { }, selectedAnswers: [] });
+type State = 'start' | 'loading' | 'quiz' | 'results';
+
+export const SelectAnswerContext = createContext<SelectAnswerContextType>({
+  questions: [],
+  setSelected: () => { },
+  selectedAnswers: [],
+  maxQuestions: 10,
+});
 
 function App() {
+  const MAX_QUESTION = 10;
   const [state, setState] = useState<State>('start');
   const [questionParams, setQuestionParams] = useState<string>('');
-  const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(9).fill(null));
+  const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(MAX_QUESTION).fill(null));
 
-  const { data, refetch } = useQuery({
-    queryKey: ['questions'],
+  const { data, isLoading } = useQuery({
+    queryKey: ['questions', questionParams],
     queryFn: () => fetchQuestions(questionParams),
-    enabled: false
+    enabled: !!questionParams,
+    refetchOnWindowFocus: false,
   });
 
   const handleStartQuiz = async (queryParams: string): Promise<void> => {
     setQuestionParams(queryParams);
     setState('loading');
-    await refetch();
-    setState('quiz');
   };
   const setSelected = (question: number, answer: number): void => {
-    const newSelected = [...selectedAnswers];
-    newSelected[question] = answer;
-    setSelectedAnswers(newSelected);
-  }
+    const newSelectedAnswers = [...selectedAnswers];
+    newSelectedAnswers[question] = answer;
+    setSelectedAnswers(newSelectedAnswers);
+  };
+  const handleSubmit = () => {
+    setState('results');
+  };
+  const handleRestart = () => {
+    setSelectedAnswers(Array(MAX_QUESTION).fill(null));
+    setState('start');
+  };
+
+  useEffect(() => {
+    if (!isLoading && !!questionParams) {
+      setState('quiz')
+    }
+  }, [data]);
 
   let view = null;
   switch (state) {
     case 'loading':
-      view = <Loader />
+      view = <Loader />;
       break;
     case 'quiz':
-      view = (
-        <SelectAnswerContext.Provider value={{ setSelected, selectedAnswers }}>
-          <Questions questions={data || []} />
-        </SelectAnswerContext.Provider>
-      )
+      view = <Questions onSubmit={handleSubmit} />;
       break;
-    case 'result':
-      view = <Results />;
+    case 'results':
+      view = <Results onRestart={handleRestart} />;
       break;
     default:
-      view = <Start onStart={handleStartQuiz} />
+      view = <Start onStart={handleStartQuiz} />;
       break;
   }
 
   return (
     <MantineProvider>
-      {view}
+      <SelectAnswerContext.Provider
+        value={
+          {
+            questions: data || [],
+            setSelected,
+            selectedAnswers,
+            maxQuestions: MAX_QUESTION
+          }
+        }>
+        {view}
+      </SelectAnswerContext.Provider>
     </MantineProvider>
   )
 }
