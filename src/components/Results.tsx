@@ -1,7 +1,7 @@
-import { PieChart } from "recharts";
 import { AnswerSummary } from "./AnswerSummary";
 import { useContext } from "react";
 import { SelectAnswerContext } from "../App";
+import { PieChart } from "@mantine/charts";
 
 export function Results() {
   const { questions, selectedAnswers } = useContext(SelectAnswerContext);
@@ -13,12 +13,23 @@ export function Results() {
     });
   const numberOfGoodAnswers = isAnswerCorrect.filter((item) => item === true).length;
   const result = <div>{numberOfGoodAnswers}/{questions.length}</div>
+  const chartData = [
+    { name: 'Correct', value: numberOfGoodAnswers, color: 'green.6' },
+    { name: 'Incorrect', value: 10 - numberOfGoodAnswers, color: 'red.6' },
+  ]
 
   return (
     <>
       <h2>Results</h2>
       {result}
-      <PieChart />
+      <PieChart
+        data={chartData}
+        withLabels
+        labelsPosition="inside"
+        labelsType="percent"
+        withTooltip
+        tooltipDataSource="segment"
+      />
       <AnswerSummary />
     </>
 
