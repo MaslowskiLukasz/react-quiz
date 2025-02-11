@@ -33,7 +33,8 @@ function App() {
   const { data, isLoading } = useQuery({
     queryKey: ['questions', questionParams],
     queryFn: () => fetchQuestions(questionParams),
-    enabled: !!questionParams
+    enabled: !!questionParams,
+    refetchOnWindowFocus: false,
   });
 
   const handleStartQuiz = async (queryParams: string): Promise<void> => {
