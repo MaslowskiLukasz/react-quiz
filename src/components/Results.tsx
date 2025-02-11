@@ -16,7 +16,17 @@ export function Results() {
   const chartData = [
     { name: 'Correct', value: numberOfGoodAnswers, color: 'green.6' },
     { name: 'Incorrect', value: 10 - numberOfGoodAnswers, color: 'red.6' },
-  ]
+  ];
+
+  const summary = questions.map((question, index) => {
+    return (
+      <AnswerSummary
+        key={index}
+        question={question}
+        selectedAnswer={selectedAnswers[index]}
+      />
+    );
+  })
 
   return (
     <>
@@ -30,7 +40,7 @@ export function Results() {
         withTooltip
         tooltipDataSource="segment"
       />
-      <AnswerSummary />
+      {summary}
     </>
 
   );
