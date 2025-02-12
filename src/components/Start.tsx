@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Category } from "../models/models";
 import { fetchCategories } from "../helpers/api";
-import { Loader } from "./Loader"; import { Note } from "@phosphor-icons/react";
+import { Loader } from "./Loader";
+import { Note, RocketLaunch } from "@phosphor-icons/react";
 
 type Props = {
   onStart: (queryParam: string) => void;
@@ -57,6 +58,7 @@ export function Start(props: Props) {
       />
       <Flex justify='center'>
         <Button
+          rightSection={<RocketLaunch size={14} />}
           color="grape"
           onClick={handleStart}
         >

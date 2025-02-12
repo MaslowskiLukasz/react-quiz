@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { AnswerPresentationModel } from "../models/models";
 import { Answer } from "./Answer";
-import { Button, Flex, SimpleGrid } from "@mantine/core";
+import { Button, Flex, SimpleGrid, Title } from "@mantine/core";
 import { SelectAnswerContext } from "../App";
+import { ArrowLeft, ArrowRight, Check } from "@phosphor-icons/react";
 
 type Props = {
   questionNumber: number
@@ -33,10 +34,13 @@ export function Question(props: Props) {
   const previousButtonEnabled = questionNumber > 0;
   const nextButtonEnabled = !isLastQuestion || areAllAnswersSelected;
   const isSubmitButton = isLastQuestion && areAllAnswersSelected;
+  const iconNextButton = isLastQuestion
+    ? <Check size={14} />
+    : <ArrowRight size={14} />;
 
   return (
     <>
-      <h2>Question #{questionNumber + 1}</h2>
+      <Title order={2}>Question #{questionNumber + 1}</Title>
       <p>{question}</p>
       <SimpleGrid
         my='xl'
@@ -46,12 +50,14 @@ export function Question(props: Props) {
       </SimpleGrid>
       <Flex justify='space-between'>
         <Button
+          leftSection={<ArrowLeft size={14} />}
           onClick={onPrevious}
           disabled={!previousButtonEnabled}
         >
           Previous
         </Button>
         <Button
+          rightSection={iconNextButton}
           color={isSubmitButton ? 'grape' : 'blue'}
           onClick={onNext}
           disabled={!nextButtonEnabled}

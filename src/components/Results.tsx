@@ -4,6 +4,7 @@ import { SelectAnswerContext } from "../App";
 import { PieChart } from "@mantine/charts";
 import { Accordion, Button, Divider, Flex } from "@mantine/core";
 import { Title } from "@mantine/core";
+import { ArrowCounterClockwise } from "@phosphor-icons/react";
 
 interface Props {
   onRestart: () => void;
@@ -49,7 +50,13 @@ export function Results(props: Props) {
           withTooltip
           tooltipDataSource="segment"
         />
-        <Button color='grape' onClick={onRestart}>Try another quiz</Button>
+        <Button
+          rightSection={<ArrowCounterClockwise size={14} />}
+          color='grape'
+          onClick={onRestart}
+        >
+          Try another quiz
+        </Button>
       </Flex>
       <Divider my='xl' />
       <Accordion variant="separated">
