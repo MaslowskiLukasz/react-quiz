@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AnswerPresentationModel } from "../models/models";
 import { Answer } from "./Answer";
-import { Button, SimpleGrid } from "@mantine/core";
+import { Button, Flex, SimpleGrid } from "@mantine/core";
 import { SelectAnswerContext } from "../App";
 
 type Props = {
@@ -38,15 +38,27 @@ export function Question(props: Props) {
     <>
       <h2>Question #{questionNumber + 1}</h2>
       <p>{question}</p>
-      <SimpleGrid cols={2}>
+      <SimpleGrid
+        my='xl'
+        cols={{ base: 1, md: 2 }}
+      >
         {answerButtons}
       </SimpleGrid>
-      <div>
-        <Button onClick={onPrevious} disabled={!previousButtonEnabled}>Previous</Button>
-        <Button onClick={onNext} disabled={!nextButtonEnabled}>
-          {isSubmitButton ? 'Submit' : 'Next'}
+      <Flex justify='space-between'>
+        <Button
+          onClick={onPrevious}
+          disabled={!previousButtonEnabled}
+        >
+          Previous
         </Button>
-      </div>
+        <Button
+          color={isSubmitButton ? 'grape' : 'blue'}
+          onClick={onNext}
+          disabled={!nextButtonEnabled}
+        >
+          {isLastQuestion ? 'Submit' : 'Next'}
+        </Button>
+      </Flex>
     </>
   )
 }

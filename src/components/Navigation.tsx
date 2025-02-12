@@ -11,6 +11,7 @@ export function Navigation(props: Props) {
 
   return (
     <Button
+      size='xs'
       variant={variant}
       onClick={onClick}
     >

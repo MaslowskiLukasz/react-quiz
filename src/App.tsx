@@ -10,6 +10,7 @@ import { fetchQuestions } from './helpers/api';
 import { Loader } from './components/Loader';
 import { Start } from './components/Start';
 import { QuestionPresentationModel } from './models/models';
+import { theme } from './theme';
 
 interface SelectAnswerContextType {
   questions: QuestionPresentationModel[];
@@ -80,7 +81,7 @@ function App() {
   }
 
   return (
-    <MantineProvider>
+    <MantineProvider theme={theme} forceColorScheme='dark'>
       <SelectAnswerContext.Provider
         value={
           {

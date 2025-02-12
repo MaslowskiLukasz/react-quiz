@@ -2,7 +2,8 @@ import { AnswerSummary } from "./AnswerSummary";
 import { useContext } from "react";
 import { SelectAnswerContext } from "../App";
 import { PieChart } from "@mantine/charts";
-import { Accordion, Button } from "@mantine/core";
+import { Accordion, Button, Divider, Flex } from "@mantine/core";
+import { Title } from "@mantine/core";
 
 interface Props {
   onRestart: () => void;
@@ -10,7 +11,7 @@ interface Props {
 
 export function Results(props: Props) {
   const { onRestart } = props;
-  const { questions, selectedAnswers } = useContext(SelectAnswerContext);
+  const { questions, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
 
   const isAnswerCorrect = selectedAnswers.map(
     (answer: number, index: number) => {
@@ -35,16 +36,22 @@ export function Results(props: Props) {
 
   return (
     <>
-      <h2>Results</h2>
-      <PieChart
-        data={chartData}
-        withLabels
-        labelsPosition="inside"
-        labelsType="percent"
-        withTooltip
-        tooltipDataSource="segment"
-      />
-      <Button onClick={onRestart}>Restart</Button>
+      <Title>Results</Title>
+      <Flex align='center' direction='column' gap='lg' my='xl'>
+        <div>
+          Your score is: {numberOfGoodAnswers}/{maxQuestions}
+        </div>
+        <PieChart
+          data={chartData}
+          withLabels
+          labelsPosition="inside"
+          labelsType="percent"
+          withTooltip
+          tooltipDataSource="segment"
+        />
+        <Button color='grape' onClick={onRestart}>Try another quiz</Button>
+      </Flex>
+      <Divider my='xl' />
       <Accordion variant="separated">
         {summary}
       </Accordion>
