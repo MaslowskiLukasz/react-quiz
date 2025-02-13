@@ -1,3 +1,5 @@
+import { decodeText } from "../helpers/decode";
+
 export interface Category {
 	id: number;
 	name: string;
@@ -14,7 +16,7 @@ export class AnswerPresentationModel {
 	isCorrect: boolean = false;
 
 	constructor(text: string, isCorrect: boolean) {
-		this.text = text;
+		this.text = decodeText(text);
 		this.isCorrect = isCorrect;
 	}
 }
@@ -24,7 +26,7 @@ export class QuestionPresentationModel {
 	answers: AnswerPresentationModel[] = [];
 
 	constructor(response: Question) {
-		this.question = response.question;
+		this.question = decodeText(response.question);
 		const correct = new AnswerPresentationModel(response.correct_answer, true);
 		const incorrect = response.incorrect_answers.map((item) => new AnswerPresentationModel(item, false));
 		const randomizedAnswers =
