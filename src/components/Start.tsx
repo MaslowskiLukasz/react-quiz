@@ -1,9 +1,10 @@
-import { Button, Select } from "@mantine/core";
+import { Button, Flex, List, Select, Text } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Category } from "../models/models";
 import { fetchCategories } from "../helpers/api";
 import { Loader } from "./Loader";
+import { Note, RocketLaunch } from "@phosphor-icons/react";
 
 type Props = {
   onStart: (queryParam: string) => void;
@@ -15,7 +16,7 @@ export function Start(props: Props) {
 
   const { status: categoriesStatus, data: categories } = useQuery({
     queryKey: ['categories'],
-    queryFn: fetchCategories
+    queryFn: fetchCategories,
   });
 
   const handleStart = () => {
@@ -33,15 +34,37 @@ export function Start(props: Props) {
 
   return (
     <>
-      <h2>Pick a category and start the quiz</h2>
+      <Text
+        my='xl'
+        size='xl'
+        fw={700}
+        variant='gradient'
+        gradient={{ from: 'grape', to: 'blue', deg: 90 }}
+      >
+        Pick a category and start the quiz!
+      </Text>
+      <List>
+        <List.Item icon={<Note />}>There is always only one correct answer</List.Item>
+        <List.Item icon={<Note />}>You can skip quesitons and come back to them later</List.Item>
+        <List.Item icon={<Note />}>You can change your answer until you submit</List.Item>
+      </List>
       <Select
-        label='Categories'
-        placeholder='Pick categories'
+        my='xl'
+        label='Choose your category'
+        placeholder='Questions from random categories'
         data={categoryNames}
         value={selectedCategoryName}
         onChange={setSelectedCategoryName}
       />
-      <Button onClick={handleStart}>Start quiz</Button>
+      <Flex justify='center'>
+        <Button
+          rightSection={<RocketLaunch size={14} />}
+          color="grape"
+          onClick={handleStart}
+        >
+          Play now!
+        </Button>
+      </Flex>
     </>
   )
 }

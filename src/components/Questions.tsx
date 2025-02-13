@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { SelectAnswerContext } from "../App";
 import { Navigation } from "./Navigation";
 import { Question } from "./Question";
+import { Flex, Space } from "@mantine/core";
 
 type Props = {
   onSubmit: () => void,
@@ -45,7 +46,15 @@ export function Questions(props: Props) {
 
   return (
     <>
-      {navigation}
+      <Flex
+        my='xl'
+        gap='sm'
+        justify='center'
+        wrap='wrap'
+      >
+        {navigation}
+      </Flex>
+      <Space h='xl' />
       <Question
         question={currentQuestion.question}
         questionNumber={questionNumber}
