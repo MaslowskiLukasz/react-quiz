@@ -3,6 +3,8 @@
 ## Quiz App
 A simple and interactive quiz app that allows users to test their knowledge on various topics.
 
+You can play around with it [here](https://maslowskilukasz.github.io/react-quiz/).
+
 ### What is yet to come?
 - Scoreboard
 - Choosing the difficulty of the questions
