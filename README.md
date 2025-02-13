@@ -13,7 +13,7 @@ A simple and interactive quiz app that allows users to test their knowledge on v
 - TypeScript
 - Vite
 - Mantine
-- Tanstack React Query
+- Tanstack Query
 - Phosphor Icons
 
 ## How to run
