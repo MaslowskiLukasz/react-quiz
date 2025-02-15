@@ -38,3 +38,12 @@ export class QuestionPresentationModel {
 		this.answers = [...randomizedAnswers];
 	}
 }
+
+export interface SelectAnswerContextType {
+	questions: QuestionPresentationModel[];
+	setSelected: (question: number, answer: number) => void;
+	selectedAnswers: number[];
+	maxQuestions: number;
+}
+
+export type State = 'start' | 'loading' | 'quiz' | 'results' | 'error';
