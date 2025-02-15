@@ -38,7 +38,7 @@ export function Start(props: Props) {
   const categoryParam = selectedCategory ? `&category=${selectedCategory.id}` : '';
   const difficultyParam = selectedDifficulty ? `&difficulty=${selectedDifficulty.toLowerCase()}` : '';
   const questionsParams = `api.php?amount=10${categoryParam}${difficultyParam}&type=multiple`;
-  const questionDifficulty = ['Easy', 'Medium', 'hard'];
+  const questionDifficulty = ['Easy', 'Medium', 'Hard'];
 
   return (
     <>
