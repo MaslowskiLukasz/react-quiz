@@ -52,9 +52,6 @@ function App() {
 
   useEffect(() => {
     if (!isLoading && !!questionParams) {
-      if (isError) {
-        setState('error');
-      }
       setState('quiz')
     }
   }, [data]);

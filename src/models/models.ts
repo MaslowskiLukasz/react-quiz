@@ -46,4 +46,4 @@ export interface SelectAnswerContextType {
 	maxQuestions: number;
 }
 
-export type State = 'start' | 'loading' | 'quiz' | 'results' | 'error';
+export type State = 'start' | 'loading' | 'quiz' | 'results';
