@@ -9,17 +9,9 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchQuestions } from './helpers/api';
 import { Loader } from './components/Loader';
 import { Start } from './components/Start';
-import { QuestionPresentationModel } from './models/models';
 import { theme } from './theme';
-
-interface SelectAnswerContextType {
-  questions: QuestionPresentationModel[];
-  setSelected: (question: number, answer: number) => void;
-  selectedAnswers: number[];
-  maxQuestions: number;
-}
-
-type State = 'start' | 'loading' | 'quiz' | 'results';
+import { ErrorScreen } from './components/ErrorScreen';
+import { SelectAnswerContextType, State } from './models/models';
 
 export const SelectAnswerContext = createContext<SelectAnswerContextType>({
   questions: [],
@@ -34,7 +26,7 @@ function App() {
   const [questionParams, setQuestionParams] = useState<string>('');
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(MAX_QUESTION).fill(null));
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['questions', questionParams],
     queryFn: () => fetchQuestions(questionParams),
     enabled: !!questionParams,
@@ -63,6 +55,10 @@ function App() {
       setState('quiz')
     }
   }, [data]);
+
+  if (isError) {
+    return <ErrorScreen error={error} />;
+  }
 
   let view = null;
   switch (state) {

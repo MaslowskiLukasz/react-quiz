@@ -5,6 +5,7 @@ import { Category } from "../models/models";
 import { fetchCategories } from "../helpers/api";
 import { Loader } from "./Loader";
 import { Note, RocketLaunch } from "@phosphor-icons/react";
+import { ErrorScreen } from "./ErrorScreen";
 
 type Props = {
   onStart: (queryParam: string) => void;
@@ -14,7 +15,7 @@ export function Start(props: Props) {
   const { onStart } = props;
   const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>('');
 
-  const { status: categoriesStatus, data: categories } = useQuery({
+  const { status: categoriesStatus, data: categories, isError, error } = useQuery({
     queryKey: ['categories'],
     queryFn: fetchCategories,
   });
@@ -22,6 +23,10 @@ export function Start(props: Props) {
   const handleStart = () => {
     onStart(questionsParams);
   };
+
+  if (isError) {
+    return <ErrorScreen error={error} />;
+  }
 
   if (categoriesStatus !== 'success') {
     return <Loader />;
