@@ -14,6 +14,7 @@ type Props = {
 export function Start(props: Props) {
   const { onStart } = props;
   const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>('');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>('');
 
   const { status: categoriesStatus, data: categories, isError, error } = useQuery({
     queryKey: ['categories'],
@@ -35,7 +36,9 @@ export function Start(props: Props) {
   const categoryNames = categories.map((item: Category) => item.name);
   const selectedCategory = categories.find((item: Category) => item.name === selectedCategoryName);
   const categoryParam = selectedCategory ? `&category=${selectedCategory.id}` : '';
-  const questionsParams = `api.php?amount=10${categoryParam}&type=multiple`;
+  const difficultyParam = selectedDifficulty ? `&difficulty=${selectedDifficulty.toLowerCase()}` : '';
+  const questionsParams = `api.php?amount=10${categoryParam}${difficultyParam}&type=multiple`;
+  const questionDifficulty = ['Easy', 'Medium', 'hard'];
 
   return (
     <>
@@ -48,20 +51,26 @@ export function Start(props: Props) {
       >
         Pick a category and start the quiz!
       </Text>
-      <List>
+      <List my='xl'>
         <List.Item icon={<Note />}>There is always only one correct answer</List.Item>
         <List.Item icon={<Note />}>You can skip quesitons and come back to them later</List.Item>
         <List.Item icon={<Note />}>You can change your answer until you submit</List.Item>
       </List>
       <Select
-        my='xl'
         label='Choose your category'
         placeholder='Questions from random categories'
         data={categoryNames}
         value={selectedCategoryName}
         onChange={setSelectedCategoryName}
       />
-      <Flex justify='center'>
+      <Select
+        my='md'
+        label='Choose question difficulty'
+        placeholder='Random difficulty'
+        data={questionDifficulty}
+        onChange={setSelectedDifficulty}
+      />
+      <Flex my='xl' justify='center'>
         <Button
           rightSection={<RocketLaunch size={14} />}
           color="grape"
