@@ -47,3 +47,12 @@ export interface SelectAnswerContextType {
 }
 
 export type State = 'start' | 'loading' | 'quiz' | 'results';
+
+export interface Score {
+	name: string;
+	value: number;
+}
+
+export interface ResultScreenStateContextType {
+	readonly: boolean;
+}

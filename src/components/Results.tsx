@@ -1,10 +1,12 @@
 import { AnswerSummary } from "./AnswerSummary";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SelectAnswerContext } from "../App";
 import { PieChart } from "@mantine/charts";
-import { Accordion, Button, Divider, Flex } from "@mantine/core";
+import { Accordion, Button, Divider, Flex, Modal } from "@mantine/core";
 import { Title } from "@mantine/core";
-import { ArrowCounterClockwise } from "@phosphor-icons/react";
+import { ArrowCounterClockwise, Confetti } from "@phosphor-icons/react";
+import { useDisclosure } from "@mantine/hooks";
+import { ScoreboardModal } from "./ScoreboardModal";
 
 interface Props {
   onRestart: () => void;
@@ -13,6 +15,8 @@ interface Props {
 export function Results(props: Props) {
   const { onRestart } = props;
   const { questions, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
+  const [opened, { open, close }] = useDisclosure(false);
+  const [resultsReadonly, setResultsReadonly] = useState<boolean>(false);
 
   const isAnswerCorrect = selectedAnswers.map(
     (answer: number, index: number) => {
@@ -24,6 +28,13 @@ export function Results(props: Props) {
     { name: 'Correct', value: numberOfGoodAnswers, color: 'green.6' },
     { name: 'Incorrect', value: 10 - numberOfGoodAnswers, color: 'red.6' },
   ];
+  const handleRestart = () => {
+    setResultsReadonly(false);
+    onRestart();
+  };
+  const handleSave = () => {
+    setResultsReadonly(true);
+  }
 
   const summary = questions.map((question, index) => {
     return (
@@ -37,6 +48,13 @@ export function Results(props: Props) {
 
   return (
     <>
+      <Modal opened={opened} onClose={close} title='Scoreboard' centered>
+        <ScoreboardModal
+          readonly={resultsReadonly}
+          result={numberOfGoodAnswers}
+          onSaveScore={handleSave}
+        />
+      </Modal>
       <Title>Results</Title>
       <Flex align='center' direction='column' gap='lg' my='xl'>
         <div>
@@ -50,13 +68,22 @@ export function Results(props: Props) {
           withTooltip
           tooltipDataSource="segment"
         />
-        <Button
-          rightSection={<ArrowCounterClockwise size={14} />}
-          color='grape'
-          onClick={onRestart}
-        >
-          Try another quiz
-        </Button>
+        <Flex gap='md'>
+          <Button
+            rightSection={<ArrowCounterClockwise size={14} />}
+            color='grape'
+            onClick={handleRestart}
+          >
+            Try another quiz
+          </Button>
+          <Button
+            variant="outline"
+            rightSection={<Confetti size={14} />}
+            onClick={open}
+          >
+            Save to scorebaord
+          </Button>
+        </Flex>
       </Flex>
       <Divider my='xl' />
       <Accordion variant="separated">
