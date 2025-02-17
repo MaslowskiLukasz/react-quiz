@@ -1,6 +1,7 @@
 import './App.css';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
+import '@mantine/core/styles.layer.css'
 import { MantineProvider } from '@mantine/core';
 import { createContext, useEffect, useState } from 'react';
 import { Questions } from './components/Questions';
@@ -77,19 +78,21 @@ function App() {
   }
 
   return (
-    <MantineProvider theme={theme} forceColorScheme='dark'>
-      <SelectAnswerContext.Provider
-        value={
-          {
-            questions: data || [],
-            setSelected,
-            selectedAnswers,
-            maxQuestions: MAX_QUESTION
-          }
-        }>
-        {view}
-      </SelectAnswerContext.Provider>
-    </MantineProvider>
+    <div className='app'>
+      <MantineProvider theme={theme} forceColorScheme='dark'>
+        <SelectAnswerContext.Provider
+          value={
+            {
+              questions: data || [],
+              setSelected,
+              selectedAnswers,
+              maxQuestions: MAX_QUESTION
+            }
+          }>
+          {view}
+        </SelectAnswerContext.Provider>
+      </MantineProvider>
+    </div>
   )
 }
 
