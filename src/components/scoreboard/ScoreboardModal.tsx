@@ -1,4 +1,3 @@
-import { Button } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { NotOnScoreboard } from "./NotOnScoreboard";
 import { Scoreboard } from "./Scoreboard";
@@ -12,7 +11,7 @@ interface Props {
 
 export function ScoreboardModal(props: Props) {
   const { result, readonly, onSaveScore } = props;
-  const [topScores, setTopScores] = useLocalStorage<Score[]>({
+  const [topScores] = useLocalStorage<Score[]>({
     key: 'top-scores',
     defaultValue: []
   });
@@ -47,25 +46,8 @@ export function ScoreboardModal(props: Props) {
     onSaveScore();
   };
 
-
-  const addTopScore = () => {
-    const newTopScores = [...topScores];
-    newTopScores.push({ name: 'test', value: 6 });
-    newTopScores.sort((a, b) => b.value - a.value);
-    setTopScores(newTopScores);
-  };
-  const clearTopScore = () => {
-    setTopScores([]);
-  };
-
   if (position === -1) {
-    return (
-      <>
-        <NotOnScoreboard />
-        <Button onClick={addTopScore}>Add score</Button>
-        <Button onClick={clearTopScore}>Reset</Button>
-      </>
-    );
+    return <NotOnScoreboard />;
   }
 
   return (
