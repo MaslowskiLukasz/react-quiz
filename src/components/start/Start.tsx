@@ -8,6 +8,7 @@ import { Note, RocketLaunch } from "@phosphor-icons/react";
 import { ErrorScreen } from "../shared/ErrorScreen";
 import { Scoreboard } from "../scoreboard/Scoreboard";
 import { ScoreboardTitle } from "../scoreboard/ScoreboardTitle";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onStart: (queryParam: string) => void;
@@ -17,6 +18,7 @@ export function Start(props: Props) {
   const { onStart } = props;
   const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>('');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>('');
+  const { t } = useTranslation();
 
   const { status: categoriesStatus, data: categories, isError, error } = useQuery({
     queryKey: ['categories'],
@@ -51,24 +53,24 @@ export function Start(props: Props) {
         variant='gradient'
         gradient={{ from: 'grape', to: 'blue', deg: 90 }}
       >
-        Pick a category and start the quiz!
+        {t('headers.start')}
       </Text>
       <List my='xl'>
-        <List.Item icon={<Note />}>There is always only one correct answer</List.Item>
-        <List.Item icon={<Note />}>You can skip quesitons and come back to them later</List.Item>
-        <List.Item icon={<Note />}>You can change your answer until you submit</List.Item>
+        <List.Item icon={<Note />}>{t('rules.oneAnswer')}</List.Item>
+        <List.Item icon={<Note />}>{t('rules.skip')}</List.Item>
+        <List.Item icon={<Note />}>{t('rules.change')}</List.Item>
       </List>
       <Select
-        label='Choose your category'
-        placeholder='Questions from random categories'
+        label={t('labels.category')}
+        placeholder={t('placeholders.category')}
         data={categoryNames}
         value={selectedCategoryName}
         onChange={setSelectedCategoryName}
       />
       <Select
         my='md'
-        label='Choose question difficulty'
-        placeholder='Random difficulty'
+        label={t('labels.difficulty')}
+        placeholder={t('placeholders.difficulty')}
         data={questionDifficulty}
         onChange={setSelectedDifficulty}
       />
@@ -78,7 +80,7 @@ export function Start(props: Props) {
           color="grape"
           onClick={handleStart}
         >
-          Play now!
+          {t('buttons.start')}
         </Button>
       </Flex>
       <Divider />

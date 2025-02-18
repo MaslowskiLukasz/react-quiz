@@ -2,6 +2,7 @@ import { useLocalStorage } from "@mantine/hooks";
 import { NotOnScoreboard } from "./NotOnScoreboard";
 import { Scoreboard } from "./Scoreboard";
 import { MAX_QUESTION, Score } from "../../models/models";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   result: number;
@@ -15,6 +16,7 @@ export function ScoreboardModal(props: Props) {
     key: 'top-scores',
     defaultValue: []
   });
+  const { t } = useTranslation();
 
   const place = topScores.findIndex((item) => item.value < result);
   let isFirst = false;
@@ -52,8 +54,17 @@ export function ScoreboardModal(props: Props) {
 
   return (
     <>
-      <p>Your result: {result}/{MAX_QUESTION}</p>
-      <Scoreboard readonly={readonly} position={position} score={result} onSave={handleSaveScore} />
+      <p>{t('labels.score', {
+        numerator: result,
+        denominator: MAX_QUESTION
+      })}
+      </p>
+      <Scoreboard
+        readonly={readonly}
+        position={position}
+        score={result}
+        onSave={handleSaveScore}
+      />
     </>
   );
 }
