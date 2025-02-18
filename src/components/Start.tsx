@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Category } from "../models/models";
 import { fetchCategories } from "../helpers/api";
-import { Loader } from "./Loader";
+import { Loader } from "./shared/Loader";
 import { Note, RocketLaunch } from "@phosphor-icons/react";
-import { ErrorScreen } from "./ErrorScreen";
+import { ErrorScreen } from "./shared/ErrorScreen";
 import { Scoreboard } from "./scoreboard/Scoreboard";
 import { ScoreboardTitle } from "./scoreboard/ScoreboardTitle";
 

@@ -1,6 +1,6 @@
 import { MantineProvider, Space, Spoiler, Title } from "@mantine/core";
 import { NetworkSlash } from "@phosphor-icons/react";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
 interface Props {
   error: Error;

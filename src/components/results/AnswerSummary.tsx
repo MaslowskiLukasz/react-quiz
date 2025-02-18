@@ -1,5 +1,5 @@
 import { Accordion } from "@mantine/core";
-import { QuestionPresentationModel } from "../models/models";
+import { QuestionPresentationModel } from "../../models/models";
 import { CheckCircle, XCircle } from "@phosphor-icons/react";
 
 interface Props {
