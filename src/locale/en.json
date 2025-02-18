@@ -37,7 +37,9 @@
         "lowScore": "Your score is too low for scoreboard...",
         "nextTime": "Maybe next time!"
       },
-      "errorName": "Error: {{name}}"
+      "errorName": "Error: {{name}}",
+      "showMore": "Show more",
+      "hide": "Hide"
     },
     "headers": {
       "start": "Pick a category and start the quiz!",

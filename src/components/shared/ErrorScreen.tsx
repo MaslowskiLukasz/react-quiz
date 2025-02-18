@@ -19,7 +19,11 @@ export function ErrorScreen(props: Props) {
         <Space h='xl' />
         <Title order={3}>{t('headers.moreInfo')}</Title>
         <Space h='md' />
-        <Spoiler max-height={120} showLabel='Show more' hideLabel='Hide'>
+        <Spoiler
+          max-height={120}
+          showLabel={t('labels.showMore')}
+          hideLabel={t('labels.hide')}
+        >
           <div>{t('labels.errorName', { name: error.name })}</div>
           <p>{error.message}</p>
         </Spoiler>
