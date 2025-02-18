@@ -1,4 +1,5 @@
-![Screenshot_20250213_010231](https://github.com/user-attachments/assets/65a1bdf7-e11a-47e7-af62-4ae2eba7b392)
+![image](https://github.com/user-attachments/assets/91be4656-1915-414d-8bd6-faab526c35f5)
+
 
 ## Quiz App
 A simple and interactive quiz app that allows users to test their knowledge on various topics.
