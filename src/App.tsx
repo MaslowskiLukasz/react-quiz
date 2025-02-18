@@ -9,7 +9,7 @@ import { Results } from './components/results/Results';
 import { useQuery } from '@tanstack/react-query';
 import { fetchQuestions } from './helpers/api';
 import { Loader } from './components/shared/Loader';
-import { Start } from './components/Start';
+import { Start } from './components/start/Start';
 import { theme } from './theme';
 import { ErrorScreen } from './components/shared/ErrorScreen';
 import { SelectAnswerContextType, State } from './models/models';
