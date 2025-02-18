@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import { AnswerPresentationModel } from "../models/models";
+import { AnswerPresentationModel } from "../../models/models";
 
 type Props = {
   value: AnswerPresentationModel;
