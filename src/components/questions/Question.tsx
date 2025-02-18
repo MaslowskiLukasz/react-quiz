@@ -4,6 +4,7 @@ import { Answer } from "./Answer";
 import { Button, Flex, SimpleGrid, Title } from "@mantine/core";
 import { SelectAnswerContext } from "../../App";
 import { ArrowLeft, ArrowRight, Check } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   questionNumber: number
@@ -16,9 +17,12 @@ type Props = {
 export function Question(props: Props) {
   const { question, answers, questionNumber, onNext, onPrevious } = props;
   const { setSelected, selectedAnswers } = useContext(SelectAnswerContext);
+  const { t } = useTranslation();
+
   const isSelected = (index: number) => {
     return selectedAnswers[questionNumber] === index;
-  }
+  };
+
   const answerButtons = answers.map((item, index) => {
     return (
       <Answer
@@ -41,7 +45,11 @@ export function Question(props: Props) {
 
   return (
     <>
-      <Title order={2}>Question #{questionNumber + 1}</Title>
+      <Title order={2}>
+        {t('headers.questionNumber',
+          { number: questionNumber + 1 }
+        )}
+      </Title>
       <p>{question}</p>
       <SimpleGrid
         my='xl'
@@ -55,7 +63,7 @@ export function Question(props: Props) {
           onClick={onPrevious}
           disabled={!previousButtonEnabled}
         >
-          Previous
+          {t('buttons.previous')}
         </Button>
         <Button
           rightSection={iconNextButton}
@@ -63,7 +71,7 @@ export function Question(props: Props) {
           onClick={onNext}
           disabled={!nextButtonEnabled}
         >
-          {isLastQuestion ? 'Submit' : 'Next'}
+          {isLastQuestion ? t('buttons.submit') : t('buttons.next')}
         </Button>
       </Flex>
     </>

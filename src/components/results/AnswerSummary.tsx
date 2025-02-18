@@ -1,6 +1,7 @@
 import { Accordion } from "@mantine/core";
 import { QuestionPresentationModel } from "../../models/models";
 import { CheckCircle, XCircle } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   question: QuestionPresentationModel;
@@ -9,6 +10,8 @@ interface Props {
 
 export function AnswerSummary(props: Props) {
   const { question, selectedAnswer } = props;
+  const { t } = useTranslation();
+
   const correctIndex = question.answers.findIndex((item) => item.isCorrect);
   const isCorrect = selectedAnswer === correctIndex;
   const correctAnswer = question.answers[correctIndex];
@@ -22,8 +25,16 @@ export function AnswerSummary(props: Props) {
         {question.question}
       </Accordion.Control>
       <Accordion.Panel>
-        <div>Selected answer: {question.answers[selectedAnswer].text}</div>
-        <div>Correct answer: {correctAnswer?.text}</div>
+        <div>
+          {t('labels.selectedAnswer',
+            { answer: question.answers[selectedAnswer].text }
+          )}
+        </div>
+        <div>
+          {t('labels.correctAnswer',
+            { answer: correctAnswer?.text }
+          )}
+        </div>
       </Accordion.Panel>
     </ Accordion.Item>
   );

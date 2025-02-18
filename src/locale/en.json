@@ -1,0 +1,51 @@
+{
+  "translation": {
+    "buttons": {
+      "start": "Play now!",
+      "previous": "Previous",
+      "next": "Next",
+      "submit": "Submit",
+      "restart": "Try anothre quiz",
+      "saveScoreboard": "Save to scoreboard",
+      "save": "Save"
+    },
+    "rules": {
+      "oneAnswer": "There is always only one correct answer",
+      "skip": "You can skip quesitons and come back to them later",
+      "change": "You can change your answer until you submit"
+    },
+    "placeholders": {
+      "category": "Questions from random categories",
+      "difficulty": "Random difficulty",
+      "enterName": "Enter your name"
+    },
+    "labels": {
+      "category": "Choose your category",
+      "difficulty": "Choose question difficulty",
+      "selectedAnswer": "Selected answer: {{answer}}",
+      "correctAnswer": "Correct answer: {{answer}}",
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "score": "Your score is {{numerator}}/{{denominator}}",
+      "emptyScoreboard": {
+        "noScores": "There are no saved scores right now...",
+        "try": "Why not try to take a stab at it",
+        "yourName": "You could see your name here!"
+      },
+      "notOnScoreboard": {
+        "sorry": "Sorry!",
+        "lowScore": "Your score is too low for scoreboard...",
+        "nextTime": "Maybe next time!"
+      },
+      "errorName": "Error: {{name}}"
+    },
+    "headers": {
+      "start": "Pick a category and start the quiz!",
+      "questionNumber": "Question #{{number}}",
+      "results": "Results",
+      "scoreboard": "Scoreboard",
+      "somethingWentWrong": "Whops! Something went wrong!",
+      "moreInfo": "Here is some more info"
+    }
+  }
+}

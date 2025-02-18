@@ -9,6 +9,7 @@ import { ScoreboardModal } from "../scoreboard/ScoreboardModal";
 import { ScoreboardTitle } from "../scoreboard/ScoreboardTitle";
 import { AnswerSummary } from "./AnswerSummary";
 import { MAX_QUESTION } from "../../models/models";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onRestart: () => void;
@@ -19,6 +20,7 @@ export function Results(props: Props) {
   const { questions, selectedAnswers } = useContext(SelectAnswerContext);
   const [opened, { open, close }] = useDisclosure(false);
   const [resultsReadonly, setResultsReadonly] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const isAnswerCorrect = selectedAnswers.map(
     (answer: number, index: number) => {
@@ -29,8 +31,8 @@ export function Results(props: Props) {
   const numberOfGoodAnswers = isAnswerCorrect.filter((item) => item === true).length;
 
   const chartData = [
-    { name: 'Correct', value: numberOfGoodAnswers, color: 'green.6' },
-    { name: 'Incorrect', value: MAX_QUESTION - numberOfGoodAnswers, color: 'red.6' },
+    { name: t('labels.correct'), value: numberOfGoodAnswers, color: 'green.6' },
+    { name: t('labels.incorrect'), value: MAX_QUESTION - numberOfGoodAnswers, color: 'red.6' },
   ];
 
   const handleRestart = () => {
@@ -61,10 +63,17 @@ export function Results(props: Props) {
           onSaveScore={handleSave}
         />
       </Modal>
-      <Title>Results</Title>
+      <Title>{t('headers.results')}</Title>
       <Flex align='center' direction='column' gap='lg' my='xl'>
         <div>
-          Your score is: {numberOfGoodAnswers}/{MAX_QUESTION}
+          {
+            t('labels.score',
+              {
+                numerator: numberOfGoodAnswers,
+                denominator: MAX_QUESTION
+              }
+            )
+          }
         </div>
         <PieChart
           data={chartData}
@@ -80,14 +89,14 @@ export function Results(props: Props) {
             color='grape'
             onClick={handleRestart}
           >
-            Try another quiz
+            {t('buttons.restart')}
           </Button>
           <Button
             variant="outline"
             rightSection={<Confetti size={14} />}
             onClick={open}
           >
-            Save to scorebaord
+            {t('buttons.saveScoreboard')}
           </Button>
         </Flex>
       </Flex>
