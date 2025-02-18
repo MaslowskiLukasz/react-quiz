@@ -46,7 +46,7 @@ export function Scoreboard(props: Props) {
       { name: name || '', value: score },
       ...topScores.slice(position),
     ];
-    setTopScores(newScore);
+    setTopScores(newScore.slice(0, 5));
     onSave && onSave();
   };
 
@@ -55,7 +55,7 @@ export function Scoreboard(props: Props) {
     ...scores.slice(0, position),
     <ScoreboardInput onSave={saveScore} key={`name-input-${position}`} />,
     ...scores.slice(position)
-  ];
+  ].slice(0, 5);
 
   return (
     <>
