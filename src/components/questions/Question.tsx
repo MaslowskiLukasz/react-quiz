@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { AnswerPresentationModel } from "../models/models";
+import { AnswerPresentationModel } from "../../models/models";
 import { Answer } from "./Answer";
 import { Button, Flex, SimpleGrid, Title } from "@mantine/core";
-import { SelectAnswerContext } from "../App";
+import { SelectAnswerContext } from "../../App";
 import { ArrowLeft, ArrowRight, Check } from "@phosphor-icons/react";
 
 type Props = {

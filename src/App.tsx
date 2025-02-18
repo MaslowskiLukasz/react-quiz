@@ -4,7 +4,7 @@ import '@mantine/charts/styles.css';
 import '@mantine/core/styles.layer.css'
 import { MantineProvider } from '@mantine/core';
 import { createContext, useEffect, useState } from 'react';
-import { Questions } from './components/Questions';
+import { Questions } from './components/questions/Questions';
 import { Results } from './components/Results';
 import { useQuery } from '@tanstack/react-query';
 import { fetchQuestions } from './helpers/api';

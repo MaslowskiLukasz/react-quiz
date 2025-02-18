@@ -1,5 +1,5 @@
 import { Card, Flex } from "@mantine/core";
-import { Score } from "../models/models";
+import { Score } from "../../models/models";
 
 interface Props {
   item: Score;

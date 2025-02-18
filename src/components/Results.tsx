@@ -1,4 +1,3 @@
-import { AnswerSummary } from "./AnswerSummary";
 import { useContext, useState } from "react";
 import { SelectAnswerContext } from "../App";
 import { PieChart } from "@mantine/charts";
@@ -8,6 +7,7 @@ import { ArrowCounterClockwise, Confetti } from "@phosphor-icons/react";
 import { useDisclosure } from "@mantine/hooks";
 import { ScoreboardModal } from "./scoreboard/ScoreboardModal";
 import { ScoreboardTitle } from "./scoreboard/ScoreboardTitle";
+import { AnswerSummary } from "./AnswerSummary";
 
 interface Props {
   onRestart: () => void;

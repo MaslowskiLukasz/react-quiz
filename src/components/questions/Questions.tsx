@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { SelectAnswerContext } from "../App";
+import { SelectAnswerContext } from "../../App";
 import { Navigation } from "./Navigation";
 import { Question } from "./Question";
 import { Flex, Space } from "@mantine/core";
