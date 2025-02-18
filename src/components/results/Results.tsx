@@ -8,6 +8,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { ScoreboardModal } from "../scoreboard/ScoreboardModal";
 import { ScoreboardTitle } from "../scoreboard/ScoreboardTitle";
 import { AnswerSummary } from "./AnswerSummary";
+import { MAX_QUESTION } from "../../models/models";
 
 interface Props {
   onRestart: () => void;
@@ -15,7 +16,7 @@ interface Props {
 
 export function Results(props: Props) {
   const { onRestart } = props;
-  const { questions, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
+  const { questions, selectedAnswers } = useContext(SelectAnswerContext);
   const [opened, { open, close }] = useDisclosure(false);
   const [resultsReadonly, setResultsReadonly] = useState<boolean>(false);
 
@@ -24,18 +25,22 @@ export function Results(props: Props) {
       const correctAnswer = questions[index].answers.findIndex((item) => item.isCorrect);
       return answer === correctAnswer;
     });
+
   const numberOfGoodAnswers = isAnswerCorrect.filter((item) => item === true).length;
+
   const chartData = [
     { name: 'Correct', value: numberOfGoodAnswers, color: 'green.6' },
-    { name: 'Incorrect', value: 10 - numberOfGoodAnswers, color: 'red.6' },
+    { name: 'Incorrect', value: MAX_QUESTION - numberOfGoodAnswers, color: 'red.6' },
   ];
+
   const handleRestart = () => {
     setResultsReadonly(false);
     onRestart();
   };
+
   const handleSave = () => {
     setResultsReadonly(true);
-  }
+  };
 
   const summary = questions.map((question, index) => {
     return (
@@ -59,7 +64,7 @@ export function Results(props: Props) {
       <Title>Results</Title>
       <Flex align='center' direction='column' gap='lg' my='xl'>
         <div>
-          Your score is: {numberOfGoodAnswers}/{maxQuestions}
+          Your score is: {numberOfGoodAnswers}/{MAX_QUESTION}
         </div>
         <PieChart
           data={chartData}

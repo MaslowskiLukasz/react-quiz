@@ -1,7 +1,7 @@
 import { useLocalStorage } from "@mantine/hooks";
 import { NotOnScoreboard } from "./NotOnScoreboard";
 import { Scoreboard } from "./Scoreboard";
-import { Score } from "../../models/models";
+import { MAX_QUESTION, Score } from "../../models/models";
 
 interface Props {
   result: number;
@@ -52,7 +52,7 @@ export function ScoreboardModal(props: Props) {
 
   return (
     <>
-      <p>Your result: {result}/10</p>
+      <p>Your result: {result}/{MAX_QUESTION}</p>
       <Scoreboard readonly={readonly} position={position} score={result} onSave={handleSaveScore} />
     </>
   );

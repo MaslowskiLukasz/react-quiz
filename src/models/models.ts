@@ -1,5 +1,7 @@
 import { decodeText } from "../helpers/decode";
 
+export const MAX_QUESTION = 10;
+
 export interface Category {
 	id: number;
 	name: string;
@@ -43,7 +45,6 @@ export interface SelectAnswerContextType {
 	questions: QuestionPresentationModel[];
 	setSelected: (question: number, answer: number) => void;
 	selectedAnswers: number[];
-	maxQuestions: number;
 }
 
 export type State = 'start' | 'loading' | 'quiz' | 'results';

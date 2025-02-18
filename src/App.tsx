@@ -12,17 +12,15 @@ import { Loader } from './components/shared/Loader';
 import { Start } from './components/start/Start';
 import { theme } from './theme';
 import { ErrorScreen } from './components/shared/ErrorScreen';
-import { SelectAnswerContextType, State } from './models/models';
+import { SelectAnswerContextType, State, MAX_QUESTION } from './models/models';
 
 export const SelectAnswerContext = createContext<SelectAnswerContextType>({
   questions: [],
   setSelected: () => { },
   selectedAnswers: [],
-  maxQuestions: 10,
 });
 
 function App() {
-  const MAX_QUESTION = 10;
   const [state, setState] = useState<State>('start');
   const [questionParams, setQuestionParams] = useState<string>('');
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>(Array(MAX_QUESTION).fill(null));
@@ -90,7 +88,6 @@ function App() {
               questions: data || [],
               setSelected,
               selectedAnswers,
-              maxQuestions: MAX_QUESTION
             }
           }>
           {view}

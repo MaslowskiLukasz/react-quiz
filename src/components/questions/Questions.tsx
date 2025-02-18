@@ -3,6 +3,7 @@ import { SelectAnswerContext } from "../../App";
 import { Navigation } from "./Navigation";
 import { Question } from "./Question";
 import { Flex, Space } from "@mantine/core";
+import { MAX_QUESTION } from "../../models/models";
 
 type Props = {
   onSubmit: () => void,
@@ -10,7 +11,7 @@ type Props = {
 
 export function Questions(props: Props) {
   const { onSubmit } = props;
-  const { questions, selectedAnswers, maxQuestions } = useContext(SelectAnswerContext);
+  const { questions, selectedAnswers } = useContext(SelectAnswerContext);
   const [questionNumber, setQuestionNumber] = useState(0);
   const currentQuestion = { ...questions[questionNumber] };
 
@@ -26,22 +27,26 @@ export function Questions(props: Props) {
   });
 
   const handleNextQuestion = (): void => {
-    if (questionNumber < maxQuestions - 1) {
+    if (questionNumber < MAX_QUESTION - 1) {
       setQuestionNumber(questionNumber + 1);
     };
   };
+
   const handlePreviousQuestion = (): void => {
     if (questionNumber > 0) {
       setQuestionNumber(questionNumber - 1);
     };
   };
+
   const handleGoToQuestion = (value: number): void => {
     setQuestionNumber(value);
   };
+
   const handleSubmit = () => {
     onSubmit();
   };
-  const isLastQuestion = questionNumber === maxQuestions - 1;
+
+  const isLastQuestion = questionNumber === MAX_QUESTION - 1;
 
 
   return (
