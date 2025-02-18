@@ -72,8 +72,6 @@ export function ScoreboardModal(props: Props) {
     <>
       <p>Your result: {result}/10</p>
       <Scoreboard readonly={readonly} position={position} score={result} onSave={handleSaveScore} />
-      <Button onClick={addTopScore}>Add score</Button>
-      <Button onClick={clearTopScore}>Reset</Button>
     </>
   );
 }

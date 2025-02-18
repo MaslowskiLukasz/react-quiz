@@ -3,6 +3,7 @@ import { ScoreboardInput } from "./ScoreboardInput";
 import { Score } from "../models/models";
 import { ScoreboardItem } from "./ScoreboardItem";
 import { NotOnScoreboard } from "./NotOnScoreboard";
+import { Flex, List } from "@mantine/core";
 
 interface Props {
   readonly: boolean;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export function Scoreboard(props: Props) {
-  const { readonly, position, score, onSave } = props;
+  const { readonly = false, position, score, onSave } = props;
   const [topScores, setTopScores] = useLocalStorage<Score[]>({
     key: 'top-scores',
     defaultValue: []
@@ -24,9 +25,9 @@ export function Scoreboard(props: Props) {
 
   if (position === undefined || score === undefined || readonly) {
     return (
-      <ol>
+      <Flex direction='column' gap='md'>
         {scores}
-      </ol>
+      </Flex>
     );
   }
 
@@ -53,9 +54,9 @@ export function Scoreboard(props: Props) {
 
   return (
     <>
-      <ol>
+      <Flex direction='column' gap='md'>
         {list}
-      </ol>
+      </Flex>
     </>
   );
 }

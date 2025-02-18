@@ -1,3 +1,4 @@
+import { Card, Flex } from "@mantine/core";
 import { Score } from "../models/models";
 
 interface Props {
@@ -7,5 +8,12 @@ interface Props {
 export function ScoreboardItem(props: Props) {
   const { item } = props;
 
-  return <li>{item.name}: {item.value}/10</li>;
+  return (
+    <Card shadow="sm" withBorder>
+      <Flex justify='space-between'>
+        <div>{item.name}</div>
+        <div>{item.value}/10</div>
+      </Flex>
+    </Card>
+  );
 }

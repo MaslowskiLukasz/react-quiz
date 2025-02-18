@@ -1,4 +1,4 @@
-import { Button, Flex, TextInput } from "@mantine/core"
+import { Button, Card, Flex, TextInput } from "@mantine/core"
 import { useState } from "react";
 
 interface Props {
@@ -10,11 +10,25 @@ export function ScoreboardInput(props: Props) {
   const [name, setName] = useState('');
 
   return (
-    <li>
-      <Flex gap='xs'>
-        <TextInput value={name} onChange={(event) => setName(event.currentTarget.value)} />
-        <Button onClick={() => onSave(name)}>Save</Button>
+    <Card
+      shadow='sm'
+      withBorder
+    >
+      <Flex gap='xs' justify='space-between'>
+        <TextInput
+          placeholder='Enter your name'
+          variant="filled"
+          value={name}
+          onChange={(event) => setName(event.currentTarget.value)}
+        />
+        <Button
+          color='grape'
+          disabled={!name.length}
+          onClick={() => onSave(name)}
+        >
+          Save
+        </Button>
       </Flex>
-    </li>
+    </Card>
   );
 }

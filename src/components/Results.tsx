@@ -48,7 +48,7 @@ export function Results(props: Props) {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title='Scoreboard' centered>
+      <Modal opened={opened} onClose={close} title='Best results' centered>
         <ScoreboardModal
           readonly={resultsReadonly}
           result={numberOfGoodAnswers}
