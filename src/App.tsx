@@ -34,19 +34,23 @@ function App() {
     refetchOnWindowFocus: false,
   });
 
-  const handleStartQuiz = async (queryParams: string): Promise<void> => {
+  const handleStartQuiz = (queryParams: string): void => {
     setQuestionParams(queryParams);
     setState('loading');
   };
+
   const setSelected = (question: number, answer: number): void => {
     const newSelectedAnswers = [...selectedAnswers];
     newSelectedAnswers[question] = answer;
     setSelectedAnswers(newSelectedAnswers);
   };
+
   const handleSubmit = () => {
     setState('results');
   };
+
   const handleRestart = () => {
+    setQuestionParams('');
     setSelectedAnswers(Array(MAX_QUESTION).fill(null));
     setState('start');
   };
@@ -55,7 +59,7 @@ function App() {
     if (!isLoading && !!questionParams) {
       setState('quiz')
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   if (isError) {
     return <ErrorScreen error={error} />;
