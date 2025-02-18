@@ -4,6 +4,7 @@ import { Score } from "../../models/models";
 import { ScoreboardItem } from "./ScoreboardItem";
 import { Flex } from "@mantine/core";
 import { NotOnScoreboard } from "./NotOnScoreboard";
+import { EmptyScoreboard } from "./EmptyScoreboard";
 
 interface Props {
   readonly: boolean;
@@ -24,6 +25,10 @@ export function Scoreboard(props: Props) {
   });
 
   if (position === undefined || score === undefined || readonly) {
+    if (topScores.length === 0) {
+      return <EmptyScoreboard />
+    }
+
     return (
       <Flex direction='column' gap='md'>
         {scores}
