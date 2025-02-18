@@ -6,8 +6,8 @@ import { Accordion, Button, Divider, Flex, Modal } from "@mantine/core";
 import { Title } from "@mantine/core";
 import { ArrowCounterClockwise, Confetti } from "@phosphor-icons/react";
 import { useDisclosure } from "@mantine/hooks";
-import { ScoreboardModal } from "./ScoreboardModal";
-import { ScoreboardTitle } from "./ScoreboardTitle";
+import { ScoreboardModal } from "./scoreboard/ScoreboardModal";
+import { ScoreboardTitle } from "./scoreboard/ScoreboardTitle";
 
 interface Props {
   onRestart: () => void;

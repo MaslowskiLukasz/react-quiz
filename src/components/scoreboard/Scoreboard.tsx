@@ -1,9 +1,9 @@
 import { useLocalStorage } from "@mantine/hooks";
 import { ScoreboardInput } from "./ScoreboardInput";
-import { Score } from "../models/models";
+import { Score } from "../../models/models";
 import { ScoreboardItem } from "./ScoreboardItem";
-import { NotOnScoreboard } from "./NotOnScoreboard";
 import { Flex } from "@mantine/core";
+import { NotOnScoreboard } from "./NotOnScoreboard";
 
 interface Props {
   readonly: boolean;

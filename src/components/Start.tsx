@@ -6,8 +6,8 @@ import { fetchCategories } from "../helpers/api";
 import { Loader } from "./Loader";
 import { Note, RocketLaunch } from "@phosphor-icons/react";
 import { ErrorScreen } from "./ErrorScreen";
-import { Scoreboard } from "./Scoreboard";
-import { ScoreboardTitle } from "./ScoreboardTitle";
+import { Scoreboard } from "./scoreboard/Scoreboard";
+import { ScoreboardTitle } from "./scoreboard/ScoreboardTitle";
 
 type Props = {
   onStart: (queryParam: string) => void;
