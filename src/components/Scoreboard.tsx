@@ -3,7 +3,7 @@ import { ScoreboardInput } from "./ScoreboardInput";
 import { Score } from "../models/models";
 import { ScoreboardItem } from "./ScoreboardItem";
 import { NotOnScoreboard } from "./NotOnScoreboard";
-import { Flex, List } from "@mantine/core";
+import { Flex } from "@mantine/core";
 
 interface Props {
   readonly: boolean;

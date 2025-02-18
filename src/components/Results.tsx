@@ -7,6 +7,7 @@ import { Title } from "@mantine/core";
 import { ArrowCounterClockwise, Confetti } from "@phosphor-icons/react";
 import { useDisclosure } from "@mantine/hooks";
 import { ScoreboardModal } from "./ScoreboardModal";
+import { ScoreboardTitle } from "./ScoreboardTitle";
 
 interface Props {
   onRestart: () => void;
@@ -48,7 +49,7 @@ export function Results(props: Props) {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title='Best results' centered>
+      <Modal opened={opened} onClose={close} title={<ScoreboardTitle />} centered>
         <ScoreboardModal
           readonly={resultsReadonly}
           result={numberOfGoodAnswers}

@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Flex, Group, List, Select, Space, Text, Title } from "@mantine/core";
+import { Button, Card, Divider, Flex, List, Select, Space, Text } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Category } from "../models/models";
@@ -7,6 +7,7 @@ import { Loader } from "./Loader";
 import { Note, RocketLaunch } from "@phosphor-icons/react";
 import { ErrorScreen } from "./ErrorScreen";
 import { Scoreboard } from "./Scoreboard";
+import { ScoreboardTitle } from "./ScoreboardTitle";
 
 type Props = {
   onStart: (queryParam: string) => void;
@@ -83,7 +84,7 @@ export function Start(props: Props) {
       <Divider />
       <Space h='xl' />
       <Card shadow='sm' radius='md' withBorder>
-        <Title order={3}>Scoreboard</Title>
+        <ScoreboardTitle />
         <Space h='xl' />
         <Scoreboard readonly={true} />
       </Card>
