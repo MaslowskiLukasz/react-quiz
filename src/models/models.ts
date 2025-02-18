@@ -54,6 +54,3 @@ export interface Score {
 	value: number;
 }
 
-export interface ResultScreenStateContextType {
-	readonly: boolean;
-}

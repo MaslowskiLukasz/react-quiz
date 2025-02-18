@@ -26,7 +26,7 @@ export function Scoreboard(props: Props) {
 
   if (position === undefined || score === undefined || readonly) {
     if (topScores.length === 0) {
-      return <EmptyScoreboard />
+      return <EmptyScoreboard />;
     }
 
     return (
